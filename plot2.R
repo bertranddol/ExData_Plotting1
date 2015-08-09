@@ -18,6 +18,7 @@ onedayPowerset$dateDT <- as.POSIXct(strptime(DateTime, "%Y-%m-%d %H:%M:%S"))
 
 # Powerset line graph for february 2007 1st & 2nd by time
 myplot <- png(filename="plot2.png", width=480, height =480)
-with( onedayPowerset , plot(dateDT,Global_active_power , type="l" , ylab="Global Active Power (kw)" ) )
+with( onedayPowerset , plot(dateDT,Global_active_power , type="l" , ylab="Global Active Power (kw)" , xlab="" ) )
 axis(1, at=c(1, as.integer(nrow(data)/2), nrow(data)), labels=c("Thu", "Fri", "Sat") )
 dev.off()
+
