@@ -1,16 +1,19 @@
+# powerser data model:
 # Date;Time;Global_active_power;Global_reactive_power;Voltage;Global_intensity;Sub_metering_1;Sub_metering_2;Sub_metering_3
 
-# powerset <- read.table("/Users/bdolimier/developer/perso/ExploratoryDataAnalysis/household_power_consumption.txt")
+# may want to set your working directory first...
+wd <- setwd("~/developer/perso/ExploratoryDataAnalysis/ExData_Plotting1")
 
-powerset <- read.csv("/Users/bdolimier/developer/perso/ExploratoryDataAnalysis/household_power_consumption.txt" , head=TRUE , sep=";" , dec=".", stringsAsFactors=FALSE, as.is=TRUE) 
+powerset <- read.table("household_power_consumption.txt" , header=TRUE, sep = ";", na.strings = "?")
 
-datum <- strptime( powerset[,1] , "%d/%m/%Y")
+#powerset$Date <- strptime( powerset$Date , "%d/%m/%Y")
+powerset$Date <- as.Date(powerset$Date, format ="%d/%m/%Y") 
 
-datum[558]
+onedayPowerset  <- subset(powerset, Date >= as.Date("2007-02-01") & Date <= as.Date("2007-02-02"))
+head( onedayPowerset )
 
-head( powerset[,1])
-
-# listset <- list()
-# listset[[1]] = read.table(test_human_activity_ds)
-# listset[[2]] = read.table(train_human_activity_ds)
+## Make a histogram to explore the data
+myplot <- png(filename="figure/plot1.png", width=480, height =480)
+hist(onedayPowerset$Global_active_power, main="Global Active Power", xlab="Global Active Power (kilowatts)", col="red")
+dev.off()
 
